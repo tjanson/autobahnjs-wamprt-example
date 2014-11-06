@@ -24,9 +24,18 @@ connection.onopen = function (session, details) {
   session.register('com.tomjanson.abt.add', add);
 
   console.log("Calling RPC ... [Add 5 and 4]");
-  session.call('com.tomjanson.abt.add', [5, 4]).then(function showResult(res){
-    console.log('RPC result: Sum: ' + res);
+  session.call('com.tomjanson.abt.add', [5, 4]).then(function showResult(res) {
+    console.log("RPC result: Sum: " + res);
   }, session.log);
+
+  console.log("Attempting to subscribe to a topic ...");
+  session.subscribe('com.tomjanson.abt.fooTopic', function showEvent(msg) {
+    console.log("Yay! Event on topic 'fooTopic': ", msg);
+  });
+
+
+  console.log("Attempting to publish a message ...");
+  session.publish('com.tomjanson.abt.fooTopic', ["Hello, World!"]);
 };
 
 connection.onclose = function (reason, details) {
