@@ -4,13 +4,14 @@
   "description": "A WAMP Hello World with AutobahnJS and wamp.rt – using only Node.js",
   "main": "helloworld.js",
   "scripts": {
-    "prestart": "node ./node_modules/wamp.rt/examples/basic.js &> server.log &",
+    "prestart": "node server.js &> server.log &",
     "start": "node helloworld.js"
   },
   "author": "Tom Janson",
   "license": "ISC",
   "dependencies": {
     "autobahn": "^0.9.5",
+    "commander": "^2.5.0",
     "wamp.rt": "^0.1.3"
   }
 }

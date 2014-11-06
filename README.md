@@ -12,4 +12,4 @@ Run `npm install` to install the two dependencies.
 Usage
 -----
 
-Running `npm start` should start the wamp.rt example server and execute the Hello World app. If that doesn’t work, start the server manually with `node node_modules/wamp.rt/examples/basic.js`, and the app with `node helloworld.js`.
+Running `npm start` should start the wamp.rt example server and execute the Hello World app. If that doesn’t work, start the server manually with `node server.js`, and the app with `node helloworld.js`.
