@@ -4,9 +4,12 @@ Demostrates:
 * publish and subscribe to events,
 * register and call remote prodedures.
 
+Install
+-------
+
+Run `npm install` to install the two dependencies.
+
 Usage
 -----
 
-```sh
-npm start
-```
+Running `npm start` should start the wamp.rt example server and execute the Hello World app. If that doesn’t work, start the server manually with `node node_modules/wamp.rt/examples/basic.js`, and the app with `node helloworld.js`.
