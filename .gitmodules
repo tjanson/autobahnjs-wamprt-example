@@ -1,3 +1,0 @@
-[submodule "wamp.rt"]
-	path = wamp.rt
-	url = git@github.com:Orange-OpenSource/wamp.rt.git

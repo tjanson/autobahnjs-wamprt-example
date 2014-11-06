@@ -1,15 +1,16 @@
 {
   "name": "autobahnjs-wamprt-example",
   "version": "0.0.1",
-  "description": "A WAMP Hello World using only Node.js",
+  "description": "A WAMP Hello World with AutobahnJS and wamp.rt – using only Node.js",
   "main": "helloworld.js",
   "scripts": {
-      "prestart": "sh scripts/start-server.sh",
-      "start": "node helloworld.js"
+    "prestart": "node ./node_modules/wamp.rt/examples/basic.js",
+    "start": "node helloworld.js"
   },
   "author": "Tom Janson",
   "license": "ISC",
   "dependencies": {
-    "autobahn": "^0.9.5"
+    "autobahn": "^0.9.5",
+    "wamp.rt": "^0.1.3"
   }
 }

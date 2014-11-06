@@ -7,17 +7,6 @@ Demostrates:
 Usage
 -----
 
-The wamp.rt router must be installed before use:
-
-```sh
-git submodule init
-git submodule update
-cd wamp.rt
-npm install
-```
-
-Then:
-
 ```sh
 npm start
 ```
