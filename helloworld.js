@@ -1,18 +1,14 @@
-var autobahn = require('autobahn');
+var client = require('./lib/client');
+var config = require('./config');
 
 // tons of debug output
 const SUPER_VERBOSE = false;
 
-const HOST = "127.0.0.1"
-const PORT = 9000;
-const REALM = "testRealm";
-
-var connection = new autobahn.Connection({
-  url: "ws://" + HOST + ":" + PORT + "/",
-  realm: REALM
-});
+var connection = client.connect(config);
 
 connection.onopen = function (session, details) {
+  session.prefix('api', config.uri_prefix);
+
   console.log("Connection opened.");
   if (SUPER_VERBOSE) console.dir([session, details]);
 
@@ -21,21 +17,20 @@ connection.onopen = function (session, details) {
   };
 
   console.log("Attempting to register RPC ...");
-  session.register('com.tomjanson.abt.add', add);
+  session.register('api:add', add);
 
   console.log("Calling RPC ... [Add 5 and 4]");
-  session.call('com.tomjanson.abt.add', [5, 4]).then(function showResult(res) {
+  session.call('api:add', [5, 4]).then(function showResult(res) {
     console.log("RPC result: Sum: " + res);
   }, session.log);
 
   console.log("Attempting to subscribe to a topic ...");
-  session.subscribe('com.tomjanson.abt.fooTopic', function showEvent(msg) {
+  session.subscribe('api:fooTopic', function showEvent(msg) {
     console.log("Yay! Event on topic 'fooTopic': ", msg);
   });
 
-
   console.log("Attempting to publish a message ...");
-  session.publish('com.tomjanson.abt.fooTopic', ["Hello, World!"]);
+  session.publish('', ["Hello, World!"]);
 };
 
 connection.onclose = function (reason, details) {

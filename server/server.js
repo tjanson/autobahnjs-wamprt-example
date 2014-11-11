@@ -46,8 +46,3 @@ var app = new Router(
 app.on('RPCRegistered', onRPCRegistered);
 app.on('RPCUnregistered', onRPCUnregistered);
 app.on('Publish', onPublish);
-
-app.regrpc('wamp.rt.foo', function(id,args) {
-    console.log('called with ' + args);
-    app.resrpc(id,["bar", "bar2"], {"key1": "bar1", "key2": "bar2"});
-});

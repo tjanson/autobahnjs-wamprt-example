@@ -4,7 +4,7 @@
   "description": "A WAMP Hello World with AutobahnJS and wamp.rt – using only Node.js",
   "main": "helloworld.js",
   "scripts": {
-    "prestart": "node server.js &> server.log &",
+    "prestart": "node server/server.js &> server.log &",
     "start": "node helloworld.js"
   },
   "author": "Tom Janson",
