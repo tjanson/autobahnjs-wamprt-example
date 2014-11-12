@@ -20,5 +20,10 @@ client.connect();
 client.addActor(adder);
 
 client.open(function (session, details) {
-  //session.call('api:' + adder.id, [5, 4]).then(console.log, session.log);
+  // test rpc call
+  session.call('api:' + adder.id, [5, 4]).then(console.log, session.log);
+
+  // test the actor discovery
+  session.subscribe('api:actors', console.log);
+  session.publish('api:actors-request', ["foo"]);
 });
