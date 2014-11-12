@@ -1,41 +1,28 @@
-var client = require('./lib/client');
 var config = require('./config');
+var clientlib = require('./lib/client');
+var client = new clientlib.Client(config);
 
-// tons of debug output
-const SUPER_VERBOSE = false;
+var adder = {
+  id: 'add',
+  name: 'Adder',
+  description: 'Returns the sum of two integers',
+  args: ['int', 'int'],
+  returns: ['int'],
+  fct: function add(args) {
+    return [args[0] + args[1]];
+  }
+}
 
-var connection = client.connect(config);
+client.connect();
 
-connection.onopen = function (session, details) {
-  session.prefix('api', config.uri_prefix);
+client.addActor(adder);
 
-  console.log("Connection opened.");
-  if (SUPER_VERBOSE) console.dir([session, details]);
+client.open(function (session, details) {
+  console.log('doing my own thing');
 
-  var add = function(args) {
-    return args[0] + args[1];
-  };
-
-  console.log("Attempting to register RPC ...");
-  session.register('api:add', add);
-
-  console.log("Calling RPC ... [Add 5 and 4]");
   session.call('api:add', [5, 4]).then(function showResult(res) {
     console.log("RPC result: Sum: " + res);
   }, session.log);
 
-  console.log("Attempting to subscribe to a topic ...");
-  session.subscribe('api:fooTopic', function showEvent(msg) {
-    console.log("Yay! Event on topic 'fooTopic': ", msg);
-  });
-
-  console.log("Attempting to publish a message ...");
-  session.publish('', ["Hello, World!"]);
-};
-
-connection.onclose = function (reason, details) {
-  console.log("Connection closed.");
-  if (SUPER_VERBOSE) console.dir([reason, details]);
-}
-
-connection.open();
+//  client.close();
+});
