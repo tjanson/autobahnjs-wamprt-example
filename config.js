@@ -1,5 +1,5 @@
 var config = {
-  host: '127.0.0.1',
+  host: 'alarmpi.lan',
   port: 9000,
   realm: 'testRealm',
   uri_prefix: 'com.tomjanson.abt.fooTopic',

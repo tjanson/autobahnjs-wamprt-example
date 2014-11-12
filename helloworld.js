@@ -1,8 +1,8 @@
 var config = require('./config');
-var clientlib = require('./lib/client');
-var client = new clientlib.Client(config);
+var Client = require('./lib/client');
+var Actor  = require('./lib/actor');
 
-var adder = {
+var adder = new Actor({
   id: 'add',
   name: 'Adder',
   description: 'Returns the sum of two integers',
@@ -11,18 +11,14 @@ var adder = {
   fct: function add(args) {
     return [args[0] + args[1]];
   }
-}
+});
+
+var client = new Client(config);
 
 client.connect();
 
 client.addActor(adder);
 
 client.open(function (session, details) {
-  console.log('doing my own thing');
-
-  session.call('api:add', [5, 4]).then(function showResult(res) {
-    console.log("RPC result: Sum: " + res);
-  }, session.log);
-
-//  client.close();
+  //session.call('api:' + adder.id, [5, 4]).then(console.log, session.log);
 });
